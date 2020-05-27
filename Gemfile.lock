@@ -1,0 +1,22 @@
+PATH
+  remote: .
+  specs:
+    range_compacter (1.0.0)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    minitest (5.14.1)
+    rake (13.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bundler (~> 2.0)
+  minitest (~> 5.0)
+  rake (~> 13.0)
+  range_compacter!
+
+BUNDLED WITH
+   2.0.2
