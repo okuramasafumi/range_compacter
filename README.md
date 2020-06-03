@@ -1,8 +1,6 @@
 # RangeCompacter
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/range_compacter`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+It `compact`s ranges into array of arrays.
 
 ## Installation
 
@@ -22,7 +20,46 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+With ranges:
+
+```ruby
+item1 = 1..100
+item2 = 20..40
+item3 = 60..120
+item4 = 100..200
+compacter = RangeCompacter::Compacter.new(item1, item2, item3, item4)
+compacter.compact(30..70) # => [item1, [item2, item3]]
+```
+
+With objects responding to `begin`, `end` and `cover?`:
+
+```ruby
+class Item
+  def initialize(id, range)
+    @id = id
+    @range = range
+  end
+
+  def begin
+    @range.begin
+  end
+
+  def end
+    @range.end
+  end
+
+  def cover?(it)
+    @range.cover?(it)
+  end
+end
+
+item1 = Item.new 1, 1..100
+item2 = Item.new 2, 20..40
+item3 = Item.new 3, 60..120
+item4 = Item.new 4, 100..200
+compacter = RangeCompacter::Compacter.new(item1, item2, item3, item4)
+compacter.compact(30..70) # => [item1, [item2, item3]]
+```
 
 ## Development
 
@@ -32,7 +69,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/range_compacter. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/okuramasafumi/range_compacter. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
 ## License
 
@@ -40,4 +77,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the RangeCompacter project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/range_compacter/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the RangeCompacter project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/okuramasafumi/range_compacter/blob/master/CODE_OF_CONDUCT.md).
